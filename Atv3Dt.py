@@ -16,7 +16,7 @@ class Onibus:
         if indice > self._numeroassentos:
             raise IndexError(f"Escolha um valor entre 0 e {len(self.assentos)}")
         else:
-            return self._assentos[indice].append(random.choice([True, False]))
+            return self._assentos[indice].append(random.randint(True, False))
     
     def __setitem__(self, indice, valor):
         if isinstance(valor, bool) and indice < self._numeroassentos:
@@ -25,8 +25,14 @@ class Onibus:
             raise TypeError(f"Valor deve ser booleano (True/False)")
         else:
             raise IndexError(f"Escolha um valor entre 0 e {len(self.assentos)}")
+
     def __str__(self):
-        return f"Placa do Onibus {self._placa}\nMotorista: {self._motorista}\nAssentos Totais: {self._numeroassentos}"
+        for assento in range(0, self._numeroassentos):
+            if self._assentos[assento] == True:
+                vazio += 1
+            else:
+                vago += 1
+        return f"Placa do Onibus {self._placa}\nMotorista: {self._motorista}\nAssentos Totais: {self._numeroassentos}\nAssentos Vazios: {vazio}\nAssentos Vagos: {vago}"
         
 while True:
     x = str(input("Oque deseja fazer: ")).lower()
@@ -34,8 +40,23 @@ while True:
         placa = str(input("Informe a placa: "))
         motorista = str(input("Informe o nome do motorista: "))
         onibus = Onibus(placa, motorista)
-    elif x == "teste":
+    elif x == "listar":
         os.system("cls")
+        len(onibus)
         print(onibus)
-        print(len(onibus))
-        
+    
+    elif x == "verifica":
+        y = int(input("Informe o indice: "))
+        onibus[y]
+    
+    elif x == "mudar":
+        y = int(input("Informe o indice: "))
+        w = str(input("Informe o valor(True or False): ")).lower()
+        if w == "true":
+            onibus[y, w]
+        elif w == "false":
+            onibus[y, w]
+        else:
+            print("Valor inváido!")
+
+# não finalizado
