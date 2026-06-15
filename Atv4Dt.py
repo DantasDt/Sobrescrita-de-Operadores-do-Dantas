@@ -48,24 +48,37 @@ class Barbaro(Personagem):
         self._furia = False
     
     def __add__(self, valor):
-        return self._estamina + valor
+        if self._furia == True:
+            self._estamina *= 1.5
+        else:
+            self._estamina += valor
+        return self._estamina
     
     def __sub__(self, valor):
         self._estamina - valor
-        if self._estamina < 0:
-            self._estamina = 0
-            return self._mana
+        if self._estamina <= 0:
+            self._estamina = 5
+            self._furia = True
+            return self._estamina
         else:
-            return self._mana
+            return self._estamina
     
     def __mul__(self, fator: float):
-        return self._mana * fator
+        if self._furia == True:
+            self._estamina *= fator
+            self._vida += 5
+            return self._estamina, self._vida
+        else:
+            self._estamina *= fator
+        return self._estamina
     
     def __truediv__(self, valor):
-        return self._mana / valor
+        return self._estamina / valor
     
     def __str__(self):
         super().__str__()
-        return f"Mana de {self._nome}: {self._mana}"
-
-  # A finalizar
+        return f"Estamina de {self._nome}: {self._estamina}\nEstado: {self._furia}"
+    
+while True:
+    x = str(input("Oque deseja fazer? ")).lower()
+    # a finalizar
