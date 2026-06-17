@@ -2,6 +2,8 @@ import os
 os.system("cls")
 from random import *
 
+pocoes = {}
+
 class Personagem:
     def __init__(self, nome, vida):
         self._nome = nome
@@ -11,7 +13,8 @@ class Personagem:
         return f"Nome: {self._nome}\nVida: {self._vida}"
 
     def TomarDano(self):
-        return self._vida - randint(1, 10)
+        self._vida -= randint(1, 10)
+        return self._vida
 
 class Mago(Personagem):
     def __init__(self, nome, vida, mana : float):
@@ -161,4 +164,53 @@ while True:
         case "sair":
             os.system("cls")
             break
-# Quase finalizado
+        
+        case "pocao":
+            e = str(input("Informe oque deseja fazer com uma poção: ")).lower()
+            match e:
+                case "criar":
+                    os.system("cls")
+                    nome = input("Informe o nome: ")
+                    poder = int(input("Informe o poder da poção: "))
+                    pocoes[nome] = poder
+                    
+                
+                case "usar":
+                    os.system("cls")
+                    match classe:
+                        case "mago":
+                            nome = str(input("Informe o nome da poção: "))
+                            objM + pocoes[nome]
+                    
+                        case "barbaro":
+                            nome = str(input("Informe o nome da poção: "))
+                            objB + pocoes[nome]
+                case "listar":
+                    os.system("cls")
+                    print(pocoes)
+
+        case "atacar":
+            os.system("cls")
+            a = str(input("Informe o tipo de ataque: ")).lower()
+            match a:
+                case "normal":
+                    os.system("cls")
+                    match classe:
+                        case "mago":
+                            objM.TomarDano()
+                            objM - 2
+                    
+                        case "barbaro":
+                            objB.TomarDano()
+                            objB - 2
+                case "especial":
+                    os.system("cls")
+                    match classe:
+                        case "mago":
+                            objM.TomarDano()
+                            objM / 2
+                    
+                        case "barbaro":
+                            objB.TomarDano()
+                            objB / 2
+# Finalizado
